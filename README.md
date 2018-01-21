@@ -61,7 +61,7 @@ Describe any challenges encountered while building the app.
     limitations under the License.
     
     
-    # Project 2 - *Flix*
+# Project 2 - *Flix*
 
 *Flix* is a movies app displaying box office and top rental DVDs using [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
