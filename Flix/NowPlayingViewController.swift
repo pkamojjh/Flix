@@ -11,13 +11,13 @@ import AlamofireImage
 
 class NowPlayingViewController: UIViewController, UITableViewDataSource {
     
-  
+    
     @IBOutlet weak var refreshingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
@@ -27,7 +27,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
         tableView.dataSource = self
         
         getMovies()
-
+        
         // Do any additional setup after loading the view.
     }
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl) {
@@ -58,19 +58,19 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
         task.resume()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         cell.selectionStyle = .none
         
@@ -95,5 +95,13 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
         
         
     }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+        let movie = movies[indexPath.row]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.movie = movie
+        }
+    }
+    
 }
